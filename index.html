@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<!-- ВАЖНО при деплое по пути /coaching-from-zero: без <base> относительные пути к assets ломаются на URL без завершающего слэша -->
 <base href="/coaching-from-zero/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Введение в коучинг — Iakuban Coaching Academy</title>
@@ -244,9 +245,13 @@
   .form input:focus-visible{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35);outline:none}
   .form .btn-lg{box-shadow:none;background:#fff;color:#27009A;white-space:nowrap}
   .form .btn-lg[disabled]{opacity:.7;cursor:wait}
-  .form-done{max-width:680px;margin:0 auto;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
-             border-radius:14px;padding:26px 30px;font-size:17px;line-height:1.55;color:#fff}
-  .form-done b{display:block;font-size:20px;margin-bottom:6px}
+  .form[hidden]{display:none}
+  .form-done{max-width:680px;margin:0 auto;background:rgba(46,204,141,.18);border:1px solid rgba(120,230,180,.6);
+             box-shadow:0 10px 34px rgba(16,80,54,.28);border-radius:14px;padding:26px 30px;
+             font-size:17px;line-height:1.55;color:#fff}
+  .form-done b{display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:8px}
+  .form-done b::before{content:'✓';flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+             width:28px;height:28px;border-radius:50%;background:#2ECC8D;color:#08351F;font-size:16px;font-weight:700}
   .start .fine{font-size:15.5px;color:#DDE4FF;margin-top:22px}
   .start .consent{font-size:13px;color:#C9D2FF;margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.55}
   .start .consent a{color:#fff;text-decoration:underline}
