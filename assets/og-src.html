@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- Исходник OG-превью 1200×630. Рендер: headless Chrome --window-size=1200,630 --screenshot -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{font-family:'Poppins',Arial,sans-serif;color:#EDEDED;position:relative;
+       background:radial-gradient(1100px 640px at 78% 8%,#232327 0%,#141416 58%)}
+  .rings{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.06);pointer-events:none}
+  .r1{width:820px;height:820px;left:-300px;top:-170px}
+  .r2{width:600px;height:600px;left:-190px;top:-60px}
+  .r3{width:980px;height:980px;right:-380px;bottom:-520px;border-color:rgba(255,255,255,.05)}
+  .glow{position:absolute;width:600px;height:600px;right:2%;top:-22%;border-radius:50%;
+        background:radial-gradient(closest-side,rgba(61,61,240,.30),transparent 70%)}
+  .in{position:relative;height:100%;display:flex;align-items:center;gap:56px;padding:0 70px}
+  .left{flex:1;min-width:0}
+  .logo{font-family:'Zalando Sans Expanded',Arial,sans-serif;font-size:26px;letter-spacing:.14em;
+        color:#fff;margin-bottom:38px}
+  .eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:500;
+        letter-spacing:.08em;text-transform:uppercase;color:#9DB4FF;margin-bottom:24px}
+  .eyebrow::before{content:'';width:32px;height:3px;border-radius:3px;
+        background:linear-gradient(118deg,#5C95FF -20%,#3D3DF0 45%,#27009A 120%)}
+  h1{font-family:'Zalando Sans Expanded',Arial,sans-serif;font-weight:500;font-size:58px;
+     line-height:1.14;color:#fff;letter-spacing:-.01em;margin-bottom:28px}
+  h1 .grad{background:linear-gradient(100deg,#9DB4FF,#5C7CFF 55%,#8F6BFF);
+     -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:24px;line-height:1.5;color:#B8B8BC;max-width:520px}
+  .sub b{color:#fff;font-weight:500}
+  .pill{display:inline-flex;align-items:center;margin-top:34px;font-size:20px;font-weight:500;color:#fff;
+        background:linear-gradient(118deg,#5C95FF -20%,#3D3DF0 45%,#27009A 120%);
+        border-radius:14px;padding:16px 34px;box-shadow:0 14px 38px rgba(61,61,240,.42)}
+  .photo-clip{flex:0 0 auto;width:390px;height:490px;overflow:hidden;border-radius:26px;
+        box-shadow:0 36px 80px rgba(0,0,0,.55)}
+  .photo{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;
+        transform:scale(1.06);transform-origin:50% 15%;filter:brightness(1.06)}
+</style>
+</head>
+<body>
+  <i class="rings r1"></i><i class="rings r2"></i><i class="rings r3"></i><i class="glow"></i>
+  <div class="in">
+    <div class="left">
+      <div class="logo">IAKUBAN</div>
+      <div class="eyebrow">Бесплатная программа</div>
+      <h1>Попробуйте профессию коуча — <span class="grad">на себе</span></h1>
+      <p class="sub"><b>3 урока</b> + личная сессия с коучем + сертификат академии</p>
+      <span class="pill">Бесплатно · доступ 3 дня</span>
+    </div>
+    <div class="photo-clip"><img class="photo" src="aleksei.jpg" alt=""></div>
+  </div>
+</body>
+</html>
