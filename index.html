@@ -227,25 +227,68 @@
 
   /* ─── ДОРОЖНАЯ КАРТА ─── */
   .path{padding:110px 0}
-  .path .sec-title{margin-bottom:12px}
-  .path .sec-sub{font-size:16.5px;color:#6B6B70;margin-bottom:50px;max-width:640px}
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-  .step{background:#fff;border:1px solid #ECECEF;border-radius:18px;padding:26px 24px;position:relative}
-  .step.active{background:var(--dark);border-color:transparent;color:#fff}
-  .step .here{position:absolute;top:-13px;left:22px;font-size:11.5px;font-weight:600;letter-spacing:.06em;
-       text-transform:uppercase;background:var(--grad);color:#fff;border-radius:20px;padding:5px 12px}
-  .step + .step::before{content:'→';position:absolute;left:-24px;top:50%;transform:translateY(-50%);
-       width:22px;text-align:center;font-size:19px;color:#3D3DF0;font-weight:600}
-  .step .num{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;
-       border-radius:50%;background:var(--grad);color:#fff;font-family:var(--headline);
-       font-size:16px;font-weight:500;margin-bottom:14px}
-  .step .stage{font-family:var(--headline);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
-       color:#3D3DF0;margin-bottom:8px}
-  .step.active .stage{color:#8F9BFF}
-  .step .t{font-size:17px;font-weight:600;line-height:1.35;margin-bottom:8px}
-  .step .d{font-size:14.5px;line-height:1.5;color:#6B6B70}
-  .step.active .d{color:var(--ink-soft)}
-  .path-note{font-size:15px;color:#6B6B70;margin-top:26px}
+  .path-card{background:var(--dark);border-radius:28px;padding:78px 72px 64px;position:relative;overflow:hidden}
+  .path-card .sec-eyebrow{color:#9DB4FF}
+  .path-card .sec-title{color:#fff;margin-bottom:14px;max-width:600px}
+  .path-sub{font-size:16.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:80px;max-width:600px}
+  .tl{position:relative;display:grid;grid-template-columns:repeat(4,1fr)}
+  .tl-line{position:absolute;top:5px;left:12.5%;right:12.5%;height:2px;background:rgba(255,255,255,.14);
+       pointer-events:none}
+  .tl-runner{position:absolute;top:6px;left:12.5%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;
+       background:#5C7CFF;box-shadow:0 0 16px 5px rgba(92,124,255,.55);pointer-events:none;
+       animation:tl-run 7s linear infinite}
+  /* огонёк доезжает до последней точки к 94% цикла и гаснет; вспышки точек привязаны к 31.3/62.7/94% */
+  @keyframes tl-run{0%{left:12.5%;opacity:0}4%{opacity:1}90%{opacity:1}94%{left:87.5%}96%{opacity:0}100%{left:87.5%;opacity:0}}
+  @keyframes tl-run-v{0%{top:8px;opacity:0}4%{opacity:1}90%{opacity:1}94%{top:calc(100% - 8px)}96%{opacity:0}100%{top:calc(100% - 8px);opacity:0}}
+  .tl-stop:nth-of-type(1) .dot{animation:dot-pulse-1 7s linear infinite}
+  .tl-stop:nth-of-type(2) .dot{animation:dot-flash-2 7s linear infinite}
+  .tl-stop:nth-of-type(3) .dot{animation:dot-flash-3 7s linear infinite}
+  .tl-stop:nth-of-type(4) .dot{animation:dot-flash-4 7s linear infinite}
+  @keyframes dot-pulse-1{
+    0%{box-shadow:0 0 16px 7px rgba(92,124,255,.75)}
+    6%,100%{box-shadow:0 0 0 5px rgba(92,124,255,.22)}}
+  @keyframes dot-flash-2{
+    0%,28%{background:#EDEDED;box-shadow:0 0 0 0 rgba(92,124,255,0)}
+    31.3%{background:#5C7CFF;box-shadow:0 0 16px 7px rgba(92,124,255,.8)}
+    37%{background:#5C7CFF;box-shadow:0 0 0 4px rgba(92,124,255,.2)}
+    95%{background:#5C7CFF;box-shadow:0 0 0 4px rgba(92,124,255,.2)}
+    100%{background:#EDEDED;box-shadow:0 0 0 0 rgba(92,124,255,0)}}
+  @keyframes dot-flash-3{
+    0%,59.5%{background:#EDEDED;box-shadow:0 0 0 0 rgba(92,124,255,0)}
+    62.7%{background:#5C7CFF;box-shadow:0 0 16px 7px rgba(92,124,255,.8)}
+    68%{background:#5C7CFF;box-shadow:0 0 0 4px rgba(92,124,255,.2)}
+    95%{background:#5C7CFF;box-shadow:0 0 0 4px rgba(92,124,255,.2)}
+    100%{background:#EDEDED;box-shadow:0 0 0 0 rgba(92,124,255,0)}}
+  @keyframes dot-flash-4{
+    0%,91%{background:#EDEDED;box-shadow:0 0 0 0 rgba(92,124,255,0)}
+    94%{background:#5C7CFF;box-shadow:0 0 16px 7px rgba(92,124,255,.8)}
+    98%{background:#5C7CFF;box-shadow:0 0 0 4px rgba(92,124,255,.2)}
+    100%{background:#EDEDED;box-shadow:0 0 0 0 rgba(92,124,255,0)}}
+  @media (prefers-reduced-motion:reduce){.tl-runner{display:none}.tl-stop .dot{animation:none}}
+  .tl-stop{position:relative;text-align:center;padding:0 16px}
+  .tl-stop .dot{display:block;width:12px;height:12px;border-radius:50%;background:#EDEDED;
+       margin:0 auto 28px;position:relative;z-index:1}
+  .tl-stop.active .dot{background:#5C7CFF;box-shadow:0 0 0 5px rgba(92,124,255,.22)}
+  .tl-stop .stage{font-family:var(--headline);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+       color:var(--ink-dim);margin-bottom:8px}
+  .tl-stop.active .stage{color:#8F9BFF}
+  .tl-stop .t{font-size:17px;font-weight:600;line-height:1.35;color:#fff;margin-bottom:8px}
+  .tl-stop .d{font-size:14px;line-height:1.55;color:var(--ink-soft)}
+  .tl-tie{width:0;height:22px;border-left:2px dashed rgba(92,124,255,.55);margin:16px auto 10px}
+  .here-badge{display:inline-block;font-size:13.5px;line-height:1.4;color:#DDE4FF;
+       background:rgba(61,61,240,.18);border:1px solid rgba(92,124,255,.45);border-radius:12px;padding:10px 16px}
+  .here-badge b{color:#9DB4FF;font-weight:600}
+  @media (max-width:860px){
+    .path-card{padding:52px 30px 46px}
+    .path-sub{margin-bottom:52px}
+    .tl{grid-template-columns:1fr;gap:36px}
+    .tl-line{left:5px;top:6px;bottom:6px;width:2px;height:auto;right:auto}
+    .tl-runner{left:6px;animation-name:tl-run-v}
+    .tl-stop{text-align:left;padding:0 0 0 34px}
+    .tl-stop .dot{position:absolute;left:0;top:3px;margin:0}
+    .tl-tie{display:none}
+    .here-badge{margin-top:14px}
+  }
 
   /* ─── CTA / ФОРМА ─── */
   .start{background:var(--grad-soft);padding:96px 0;color:#fff;overflow:hidden;text-align:center}
@@ -305,11 +348,9 @@
     .foryou-grid,.cert-grid,.author-grid{grid-template-columns:1fr}
     .gives-grid,.lessons,.rev-grid{grid-template-columns:1fr}
     .give{min-height:0}
-    .steps{grid-template-columns:1fr 1fr}
     .session{grid-template-columns:1fr}
     .gc-frame{height:360px}
     .quote-col{position:static}
-    .step + .step::before{display:none}
   }
   @media (max-width:520px){
     h1{font-size:33px}
@@ -328,7 +369,6 @@
     .session{padding:32px 26px}
     .session-price{min-width:0}
     .stats{grid-template-columns:1fr}
-    .steps{grid-template-columns:1fr}
     .footer-in{flex-direction:column;gap:28px}
   }
 </style>
@@ -550,24 +590,43 @@
 </section>
 
 <!-- ДОРОЖНАЯ КАРТА -->
-<section class="path">
+<section class="path" id="path">
   <div class="wrap">
-    <span class="sec-eyebrow">Что дальше</span>
-    <h2 class="sec-title">Куда ведёт эта дорога</h2>
-    <p class="sec-sub">«Введение в коучинг» — первая ступень системы обучения академии.
-       Продолжать не обязательно — но если захотите, путь выглядит так:</p>
-    <div class="steps">
-      <div class="step active"><span class="here">Вы здесь</span>
-        <div class="num">1</div><div class="stage">Ступень 1</div><h3 class="t">Введение в коучинг</h3>
-        <div class="d">Бесплатно · 3 урока + сессия · Сертификат академии</div></div>
-      <div class="step"><div class="num">2</div><div class="stage">Ступень 2</div><h3 class="t">Профессия коуч</h3>
-        <div class="d">Живой тренинг-погружение · Сертификат CCE ICF (10 часов)</div></div>
-      <div class="step"><div class="num">3</div><div class="stage">Ступень 3</div><h3 class="t">Level 1 «Магия и наука коучинга»</h3>
-        <div class="d">75 часов, 3 месяца · Путь к ACC ICF · Платная практика с первого месяца</div></div>
-      <div class="step"><div class="num">4</div><div class="stage">Ступень 4</div><h3 class="t">Level 2 «Путь Алхимика»</h3>
-        <div class="d">125 часов, 7 месяцев · Путь к PCC ICF</div></div>
+    <div class="path-card">
+      <span class="sec-eyebrow">Один путь · четыре ступени</span>
+      <h2 class="sec-title">От первого урока — до профессии коуча.</h2>
+      <p class="path-sub">«Введение в коучинг» — первая ступень системы обучения академии.
+         Продолжать не обязательно — но если захотите, путь выглядит так:</p>
+      <div class="tl">
+        <i class="tl-line"></i><i class="tl-runner"></i>
+        <div class="tl-stop active">
+          <i class="dot"></i>
+          <div class="stage">Ступень 1</div>
+          <h3 class="t">Введение в коучинг</h3>
+          <div class="d">3 урока + сессия · сертификат академии</div>
+          <div class="tl-tie"></div>
+          <div class="here-badge"><b>Вы здесь</b> — бесплатно</div>
+        </div>
+        <div class="tl-stop">
+          <i class="dot"></i>
+          <div class="stage">Ступень 2</div>
+          <h3 class="t">Профессия коуч</h3>
+          <div class="d">Живой тренинг-погружение · сертификат CCE ICF</div>
+        </div>
+        <div class="tl-stop">
+          <i class="dot"></i>
+          <div class="stage">Ступень 3</div>
+          <h3 class="t">Level 1 «Магия и наука коучинга»</h3>
+          <div class="d">75 часов, 3 месяца · путь к ACC ICF</div>
+        </div>
+        <div class="tl-stop">
+          <i class="dot"></i>
+          <div class="stage">Ступень 4</div>
+          <h3 class="t">Level 2 «Путь Алхимика»</h3>
+          <div class="d">125 часов, 7 месяцев · путь к PCC ICF</div>
+        </div>
+      </div>
     </div>
-    <p class="path-note">На каждой ступени решаете сами, идти ли дальше. Никто не будет давить.</p>
   </div>
 </section>
 
