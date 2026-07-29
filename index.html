@@ -719,8 +719,17 @@
     p.append('formParams[email]', form.email.value.trim());
     p.append('formParams[full_name]', form.name.value.trim());
     p.append('formParams[willCreatePaidDeal]', '0');
-    p.append('__gc__internal__form__helper', 'https://academy.iakuban.com/coaching-from-zero-form');
-    fetch(form.action, {method:'POST', mode:'no-cors',
+    // UTM-метки из адреса страницы — в GetCourse (атрибуция источника: threads, youtube и т.д.)
+    var utm = new URLSearchParams(location.search);
+    var utmPairs = [];
+    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){
+      var v = utm.get(k);
+      if(v){ utmPairs.push(k+'='+encodeURIComponent(v)); p.append(k, v); p.append('formParams['+k+']', v); }
+    });
+    p.append('__gc__internal__form__helper',
+      'https://academy.iakuban.com/coaching-from-zero-form' + (utmPairs.length ? '?'+utmPairs.join('&') : ''));
+    var actionUrl = form.action + (utmPairs.length ? '&'+utmPairs.join('&') : '');
+    fetch(actionUrl, {method:'POST', mode:'no-cors',
         headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:p.toString()})
       .then(function(){ form.hidden = true; done.hidden = false; })
       .catch(function(){ btn.disabled = false;
