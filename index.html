@@ -5,9 +5,30 @@
 <!-- ВАЖНО при деплое по пути /coaching-from-zero: без <base> относительные пути к assets ломаются на URL без завершающего слэша -->
 <base href="/coaching-from-zero/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google Analytics (GA4) — платформенный счётчик -->
+<!-- Google Analytics (GA4) — платформенный счётчик. Consent Mode v2: по умолчанию согласие
+     granted везде, кроме ЕЭЗ/Великобритании/Швейцарии (там denied до клика в баннере) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2D060K2Z4"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Y2D060K2Z4');</script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('set','url_passthrough',true);
+gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',
+  region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+  wait_for_update:500});
+// применяем ранее сохранённый выбор посетителя до config
+(function(){
+  try{
+    var c=localStorage.getItem('cookie_consent');
+    if(c==='granted'||c==='denied'){
+      var s=c==='granted'?'granted':'denied';
+      gtag('consent','update',{ad_storage:s,ad_user_data:s,ad_personalization:s,analytics_storage:s});
+      gtag('set','ads_data_redaction',c!=='granted');
+    }
+  }catch(e){}
+})();
+gtag('config','G-Y2D060K2Z4');
+</script>
 <!-- Yandex.Metrika counter — платформенный счётчик 109783359 -->
 <script type="text/javascript">
   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();
@@ -422,6 +443,20 @@
   .ask-tg .btn{gap:10px;font-size:15.5px;font-weight:500;padding:13px 26px}
   .ask-tg .btn svg{flex:0 0 auto}
 
+  /* ─── COOKIE-БАННЕР (Consent Mode v2) ─── */
+  .cookie-bar{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;max-width:520px;
+       margin:0 auto;background:#1C1C1F;border:1px solid rgba(255,255,255,.14);border-radius:16px;
+       padding:18px 20px;box-shadow:0 18px 50px rgba(0,0,0,.45);color:var(--ink-soft)}
+  .cookie-bar p{font-size:13.5px;line-height:1.55;margin-bottom:14px}
+  .cookie-bar a{color:#9DB4FF;text-decoration:underline}
+  .cookie-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .cookie-btns .btn{font-size:14px;font-weight:500;padding:10px 22px}
+  .cookie-decline{font-family:var(--body);font-size:14px;font-weight:500;padding:10px 18px;
+       background:none;border:1px solid rgba(255,255,255,.25);border-radius:10px;color:var(--ink-soft);
+       cursor:pointer;transition:color .2s,border-color .2s}
+  .cookie-decline:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+  @media (min-width:768px){.cookie-bar{left:24px;right:auto;margin:0}}
+
   /* ─── FOOTER ─── */
   .footer{background:var(--dark);color:var(--ink-dim);padding:56px 0 40px}
   .footer-in{display:flex;justify-content:space-between;gap:40px;font-size:13px;line-height:1.7}
@@ -803,6 +838,16 @@
 </section>
 </main>
 
+<!-- COOKIE-БАННЕР (Consent Mode v2) -->
+<div class="cookie-bar" id="cookie-bar" hidden>
+  <p>Мы используем cookies, чтобы понимать, как работает сайт, и оценивать рекламу.
+     Подробнее — в <a href="https://iakuban.com/legal/privacy-policy">политике конфиденциальности</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn" id="cookie-accept" type="button">Принять</button>
+    <button class="cookie-decline" id="cookie-decline" type="button">Отклонить</button>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="wrap footer-in">
@@ -849,6 +894,22 @@
     if (s !== sticky){ sticky = s; header.classList.toggle('is-fixed', s);
       if (!s){ header.classList.remove('menu-open'); burger.setAttribute('aria-expanded','false'); } }
   }, {passive:true});
+})();
+(function(){
+  // Cookie-баннер: показываем, пока выбор не сделан; выбор помним в localStorage
+  var bar = document.getElementById('cookie-bar');
+  function choose(v){
+    try{ localStorage.setItem('cookie_consent', v); }catch(e){}
+    var s = v==='granted' ? 'granted' : 'denied';
+    gtag('consent','update',{ad_storage:s,ad_user_data:s,ad_personalization:s,analytics_storage:s});
+    gtag('set','ads_data_redaction', v!=='granted');
+    bar.hidden = true;
+  }
+  var stored = null;
+  try{ stored = localStorage.getItem('cookie_consent'); }catch(e){}
+  if (stored!=='granted' && stored!=='denied') bar.hidden = false;
+  document.getElementById('cookie-accept').addEventListener('click', function(){ choose('granted'); });
+  document.getElementById('cookie-decline').addEventListener('click', function(){ choose('denied'); });
 })();
 (function(){
   var form = document.getElementById('lead-form');
