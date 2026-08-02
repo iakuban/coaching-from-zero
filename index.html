@@ -148,46 +148,7 @@ gtag('config','AW-17650633966');
   .btn-lg{font-size:17px;font-weight:500;padding:19px 44px;border-radius:12px;
           box-shadow:0 12px 34px rgba(61,61,240,.38)}
 
-  /* ─── HEADER (клон шапки главной iakuban.com, без «Войти» и «Подобрать коуча») ─── */
-  .header{position:absolute;inset:0 0 auto 0;z-index:40;font-family:'Montserrat',var(--body)}
-  .header.is-fixed{position:fixed;background:rgba(33,33,33,.95);
-       backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-       border-bottom:1px solid rgba(255,255,255,.1);animation:hdr-in .3s ease-out}
-  @keyframes hdr-in{from{transform:translateY(-100%);opacity:0}to{transform:none;opacity:1}}
-  @media (prefers-reduced-motion:reduce){.header.is-fixed{animation:none}}
-  .header-in{max-width:1920px;margin:0 auto;padding:clamp(16px,1.56vw,30px) clamp(16px,8vw,240px)}
-  .header-row{max-width:1440px;margin:0 auto;display:flex;align-items:center;
-       justify-content:space-between;gap:16px;height:clamp(40px,2.5vw,48px)}
-  .logo{display:inline-block;flex-shrink:0}
-  .logo img{display:block;height:clamp(18px,1.3vw,25px);width:auto}
-  .nav{display:flex;align-items:center;gap:clamp(12px,1.25vw,24px)}
-  .nav-link,.nav-dd>button{font-family:inherit;font-size:clamp(12px,0.83vw,16px);
-       line-height:clamp(18px,1.25vw,24px);font-weight:400;color:rgba(255,255,255,.9);
-       text-decoration:none;background:none;border:none;cursor:pointer;transition:color .2s}
-  .nav-link:hover,.nav-dd>button:hover{color:#fff}
-  .nav-dd{position:relative}
-  .nav-dd>button{display:inline-flex;align-items:center;gap:4px}
-  .nav-dd>button svg{transition:transform .15s}
-  .nav-dd.open>button svg{transform:rotate(180deg)}
-  .nav-dd-panel{position:absolute;top:100%;left:50%;z-index:50;padding-top:12px;
-       transform:translate(-50%,-4px);opacity:0;pointer-events:none;transition:.15s ease-out}
-  .nav-dd.open .nav-dd-panel{transform:translate(-50%,0);opacity:1;pointer-events:auto}
-  .nav-dd-menu{min-width:220px;border-radius:12px;background:#fff;padding:8px;
-       box-shadow:0 8px 30px rgba(0,0,0,.12)}
-  .nav-dd-menu a{display:block;border-radius:8px;padding:10px 16px;font-size:14px;
-       line-height:1.3;color:#28345b;text-decoration:none;transition:background .15s}
-  .nav-dd-menu a:hover{background:rgba(69,85,211,.05)}
-  .burger{display:none;background:none;border:none;cursor:pointer;color:#fff;
-       padding:10px;border-radius:50%}
-  .mobile-menu{display:none;margin:8px auto 0;max-width:1440px;background:#212121;
-       border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:8px}
-  .mobile-menu a{display:block;border-radius:8px;padding:12px 16px;font-size:15px;
-       color:rgba(255,255,255,.9);text-decoration:none}
-  .mobile-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
-  .mobile-menu .mm-label{padding:12px 16px 4px;font-size:12px;letter-spacing:.06em;
-       text-transform:uppercase;color:rgba(255,255,255,.45)}
-  .header.menu-open .mobile-menu{display:block}
-  @media (max-width:768px){.nav{display:none}.burger{display:inline-flex}}
+  section{scroll-margin-top:100px}
 
   /* ─── HERO ─── */
   .hero{background:radial-gradient(1200px 700px at 78% 10%,#232327 0%,var(--dark) 55%);
@@ -501,43 +462,204 @@ gtag('config','AW-17650633966');
 </head>
 <body>
 
-<header class="header" id="site-header">
-  <div class="header-in">
-    <div class="header-row">
-      <a class="logo" href="https://iakuban.com/" aria-label="На главную iakuban.com">
-        <img src="assets/iakuban-logo.svg" alt="IAKUBAN" width="182" height="25">
-      </a>
-      <nav class="nav" aria-label="Основная навигация">
-        <div class="nav-dd" id="nav-dd">
-          <button type="button" aria-expanded="false" aria-haspopup="true">
-            Академия
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-          </button>
-          <div class="nav-dd-panel">
-            <div class="nav-dd-menu" role="menu">
-              <a role="menuitem" href="https://iakuban.com/coaching-from-zero">Введение в коучинг</a>
-              <a role="menuitem" href="https://iakuban.com/coaching-as-a-business">Профессия коуч</a>
-              <a role="menuitem" href="https://iakuban.com/icf-level-1">ICF Level 1</a>
-              <a role="menuitem" href="https://iakuban.com/icf-level-2">ICF Level 2</a>
+<!-- IH-HEADER:START -->
+<style>
+/* ════════════════════════════════════════════════════════════════════
+   СТАНДАРТНАЯ ШАПКА IAKUBAN — единый источник: shared/header/
+   Геометрия 1-в-1 с главной iakuban.com (MainSiteHeader.vue):
+   контейнер 1920/1440, паддинги clamp, лого clamp(18px,1.3vw,25px).
+   Все классы с префиксом ih- — не конфликтуют со стилями лендингов.
+   ⚠️ Правится ТОЛЬКО здесь, затем: python3 scripts/apply_header.py
+   ════════════════════════════════════════════════════════════════════ */
+.ih-header{position:fixed;top:0;left:0;z-index:50;width:100%;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  background:rgba(33,33,33,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  font-family:'Poppins',system-ui,-apple-system,sans-serif}
+.ih-header *{box-sizing:border-box}
+.ih-outer{margin:0 auto;width:100%;max-width:1920px;
+  padding:clamp(16px,1.56vw,30px) clamp(16px,8vw,240px)}
+.ih-inner{margin:0 auto;width:100%;max-width:1440px}
+.ih-row{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  height:clamp(40px,2.5vw,48px);width:100%}
+.ih-logo{display:inline-block;flex:0 0 auto;line-height:0}
+.ih-logo img{display:block;height:clamp(18px,1.3vw,25px);width:auto;max-width:none}
+.ih-nav{display:flex;align-items:center;gap:clamp(12px,1.25vw,24px);height:clamp(40px,2.5vw,48px)}
+.ih-link{font-size:clamp(12px,0.83vw,16px);line-height:clamp(18px,1.25vw,24px);font-weight:400;
+  color:rgba(255,255,255,.9);text-decoration:none;transition:color .2s}
+.ih-link:hover{color:#fff}
+.ih-link[aria-current="page"]{color:#fff}
+
+/* ─── выпадающее меню «Академия» ─── */
+.ih-dd{position:relative}
+.ih-dd-btn{display:inline-flex;align-items:center;gap:4px;cursor:pointer;
+  background:none;border:0;padding:0;font-family:inherit;
+  font-size:clamp(12px,0.83vw,16px);line-height:clamp(18px,1.25vw,24px);font-weight:400;
+  color:rgba(255,255,255,.9);transition:color .2s}
+.ih-dd-btn:hover{color:#fff}
+.ih-dd-btn svg{transition:transform .2s}
+.ih-dd.is-open .ih-dd-btn svg{transform:rotate(180deg)}
+/* padding-top = невидимый мостик через зазор: курсор доходит до меню, не теряя hover */
+.ih-dd-panel{position:absolute;top:100%;left:50%;transform:translateX(-50%);z-index:50;
+  padding-top:12px;display:none}
+.ih-dd.is-open .ih-dd-panel{display:block}
+.ih-dd-menu{min-width:220px;border-radius:12px;background:#fff;padding:8px;
+  box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.ih-dd-menu a{display:block;border-radius:8px;padding:10px 16px;
+  font-size:14px;line-height:1.3;color:#28345B;text-decoration:none;white-space:nowrap;
+  transition:background .15s}
+.ih-dd-menu a:hover{background:rgba(69,85,211,.05)}
+.ih-dd-menu a[aria-current="page"]{background:rgba(69,85,211,.07);font-weight:500}
+
+/* ─── кнопки справа ─── */
+.ih-btn-outline,.ih-btn-solid,.ih-btn-cta{display:inline-flex;align-items:center;justify-content:center;
+  height:clamp(40px,2.5vw,48px);padding:0 clamp(14px,1.35vw,26px);
+  font-size:clamp(12px,0.83vw,16px);line-height:clamp(18px,1.25vw,24px);
+  text-decoration:none;white-space:nowrap;transition:background .2s,border-color .2s,box-shadow .2s}
+.ih-btn-outline{border:1px solid rgba(255,255,255,.8);border-radius:10px;color:#fff;font-weight:400}
+.ih-btn-outline:hover{background:rgba(255,255,255,.1)}
+.ih-btn-solid{border-radius:6px;background:rgba(255,255,255,.15);color:#fff;font-weight:500;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.ih-btn-solid:hover{background:rgba(255,255,255,.22)}
+.ih-btn-cta{border-radius:10px;color:#fff;font-weight:500;
+  background:linear-gradient(118deg,#5C95FF 0%,#3D3DF0 55%,#27009A 100%)}
+.ih-btn-cta:hover{box-shadow:0 10px 28px rgba(61,61,240,.38)}
+
+/* ─── бургер и мобильное меню ─── */
+.ih-burger{display:none;cursor:pointer;background:none;border:0;color:#fff;
+  align-items:center;justify-content:center;border-radius:999px;padding:10px;flex:0 0 auto}
+.ih-burger svg{display:block}
+.ih-mobile{display:none;margin-top:12px;border-top:1px solid rgba(255,255,255,.1);padding-top:12px}
+.ih-mobile.is-open{display:block}
+.ih-m-list{display:flex;flex-direction:column;gap:4px}
+.ih-m-btn{display:flex;width:100%;align-items:center;justify-content:space-between;cursor:pointer;
+  background:none;border:0;padding:12px 0;font-family:inherit;font-size:16px;font-weight:400;
+  color:rgba(255,255,255,.7);text-align:left;transition:color .2s}
+.ih-m-btn:hover{color:#fff}
+.ih-m-btn svg{transition:transform .2s}
+.ih-m-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.ih-m-sub{display:none;flex-direction:column;gap:4px;padding-left:16px}
+.ih-m-sub.is-open{display:flex}
+.ih-m-sub a{padding:8px 0;font-size:14px;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.ih-m-sub a:hover,.ih-m-sub a[aria-current="page"]{color:#fff}
+.ih-mobile>.ih-m-list>a{padding:12px 0;font-size:16px;color:rgba(255,255,255,.7);
+  text-decoration:none;transition:color .2s}
+.ih-mobile>.ih-m-list>a:hover{color:#fff}
+.ih-mobile .ih-btn-cta,.ih-mobile .ih-btn-solid,.ih-mobile .ih-btn-outline{margin-top:10px;width:100%}
+
+@media (max-width:767px){
+  .ih-nav{display:none}
+  .ih-burger{display:inline-flex}
+}
+@media (prefers-reduced-motion:reduce){
+  .ih-dd-btn svg,.ih-m-btn svg,.ih-link,.ih-btn-outline,.ih-btn-solid,.ih-btn-cta{transition:none}
+}
+.ih-header a:focus-visible,.ih-header button:focus-visible{outline:2px solid #9DB4FF;outline-offset:3px;border-radius:4px}
+</style>
+<header class="ih-header">
+  <div class="ih-outer">
+    <div class="ih-inner">
+      <div class="ih-row">
+        <a class="ih-logo" href="https://iakuban.com/" aria-label="IAKUBAN — на главную">
+          <img src="assets/iakuban-logo.svg" alt="IAKUBAN" width="182" height="25">
+        </a>
+        <nav class="ih-nav" aria-label="Основная навигация">
+          <div class="ih-dd">
+            <button class="ih-dd-btn" type="button" aria-expanded="false" aria-haspopup="true">Академия <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="ih-dd-panel">
+              <div class="ih-dd-menu" role="menu">
+          <a href="https://iakuban.com/coaching-from-zero" aria-current="page">Введение в коучинг</a>
+          <a href="https://iakuban.com/coaching-as-a-business">Профессия коуч</a>
+          <a href="https://iakuban.com/icf-level-1">ICF Level 1</a>
+          <a href="https://iakuban.com/icf-level-2">ICF Level 2</a>
+              </div>
             </div>
           </div>
+          <a class="ih-link" href="https://iakuban.com/about">О нас</a>
+        <a class="ih-btn-cta" href="#start">Начать бесплатно</a>
+        </nav>
+        <button class="ih-burger" type="button" aria-label="Меню" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+      </div>
+      <div class="ih-mobile">
+        <div class="ih-m-list">
+          <button class="ih-m-btn" type="button" aria-expanded="false">Академия <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="ih-m-sub">
+          <a href="https://iakuban.com/coaching-from-zero" aria-current="page">Введение в коучинг</a>
+          <a href="https://iakuban.com/coaching-as-a-business">Профессия коуч</a>
+          <a href="https://iakuban.com/icf-level-1">ICF Level 1</a>
+          <a href="https://iakuban.com/icf-level-2">ICF Level 2</a>
+          </div>
+          <a href="https://iakuban.com/about">О нас</a>
+        <a class="ih-btn-cta" href="#start">Начать бесплатно</a>
         </div>
-        <a class="nav-link" href="https://iakuban.com/about">О нас</a>
-      </nav>
-      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
-      </button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu">
-      <div class="mm-label">Академия</div>
-      <a href="https://iakuban.com/coaching-from-zero">Введение в коучинг</a>
-      <a href="https://iakuban.com/coaching-as-a-business">Профессия коуч</a>
-      <a href="https://iakuban.com/icf-level-1">ICF Level 1</a>
-      <a href="https://iakuban.com/icf-level-2">ICF Level 2</a>
-      <a href="https://iakuban.com/about">О нас</a>
+      </div>
     </div>
   </div>
 </header>
+<script>
+/* Поведение стандартной шапки IAKUBAN. Единый источник: shared/header/header.js
+   Правится ТОЛЬКО здесь, затем: python3 scripts/apply_header.py */
+(function(){
+  var header = document.querySelector('.ih-header');
+  if(!header) return;
+  var dd = header.querySelector('.ih-dd');
+  var ddBtn = dd && dd.querySelector('.ih-dd-btn');
+  var burger = header.querySelector('.ih-burger');
+  var mobile = header.querySelector('.ih-mobile');
+  var mBtn = header.querySelector('.ih-m-btn');
+  var mSub = header.querySelector('.ih-m-sub');
+  var closeTimer = null;
+
+  function setDrop(open){
+    if(!dd) return;
+    clearTimeout(closeTimer);
+    dd.classList.toggle('is-open', open);
+    ddBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  if(dd){
+    // hover — с задержкой закрытия: курсор успевает дойти до меню, даже если срежет угол
+    dd.addEventListener('mouseenter', function(){ setDrop(true); });
+    dd.addEventListener('mouseleave', function(){
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(function(){ setDrop(false); }, 250);
+    });
+    // клик — для тач-устройств и клавиатуры
+    ddBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      setDrop(!dd.classList.contains('is-open'));
+    });
+    document.addEventListener('click', function(e){
+      if(!dd.contains(e.target)) setDrop(false);
+    });
+  }
+
+  if(burger && mobile){
+    burger.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = !mobile.classList.contains('is-open');
+      mobile.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(!open && mSub){ mSub.classList.remove('is-open'); mBtn.setAttribute('aria-expanded','false'); }
+    });
+  }
+
+  if(mBtn && mSub){
+    mBtn.addEventListener('click', function(){
+      var open = !mSub.classList.contains('is-open');
+      mSub.classList.toggle('is-open', open);
+      mBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Escape') return;
+    setDrop(false);
+    if(mobile){ mobile.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); }
+    if(mSub){ mSub.classList.remove('is-open'); mBtn.setAttribute('aria-expanded','false'); }
+  });
+})();
+</script>
+<!-- IH-HEADER:END -->
 
 <main>
 <!-- HERO -->
@@ -858,32 +980,6 @@ gtag('config','AW-17650633966');
 </footer>
 
 <script>
-(function(){
-  // Шапка: дропдаун «Академия», бургер-меню, липкая шапка при скролле (как на главной)
-  var header = document.getElementById('site-header');
-  var dd = document.getElementById('nav-dd');
-  var ddBtn = dd.querySelector('button');
-  ddBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    var open = dd.classList.toggle('open');
-    ddBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  document.addEventListener('click', function(){
-    dd.classList.remove('open'); ddBtn.setAttribute('aria-expanded','false');
-  });
-  var burger = document.getElementById('burger');
-  burger.addEventListener('click', function(e){
-    e.stopPropagation();
-    var open = header.classList.toggle('menu-open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  var sticky = false;
-  window.addEventListener('scroll', function(){
-    var s = window.scrollY > 640;
-    if (s !== sticky){ sticky = s; header.classList.toggle('is-fixed', s);
-      if (!s){ header.classList.remove('menu-open'); burger.setAttribute('aria-expanded','false'); } }
-  }, {passive:true});
-})();
 (function(){
   var form = document.getElementById('lead-form');
   var done = document.getElementById('lead-done');
