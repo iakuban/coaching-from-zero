@@ -471,10 +471,16 @@ gtag('config','AW-17650633966');
    Все классы с префиксом ih- — не конфликтуют со стилями лендингов.
    ⚠️ Правится ТОЛЬКО здесь, затем: python3 scripts/apply_header.py
    ════════════════════════════════════════════════════════════════════ */
+/* Тёмная схема — пока шапка идёт поверх тёмного верха страницы.
+   Светлая (.ih-light) включается скриптом в момент, когда шапка доезжает
+   до светлого контента: граница задаётся в menu.json полем darkZone. */
 .ih-header{position:fixed;top:0;left:0;z-index:50;width:100%;
-  border-bottom:1px solid rgba(255,255,255,.1);
-  background:rgba(33,33,33,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  font-family:'Poppins',system-ui,-apple-system,sans-serif}
+  border-bottom:1px solid transparent;
+  background:rgba(33,33,33,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;
+  transition:background-color .3s ease-out,border-color .3s ease-out}
+.ih-header.ih-light{border-bottom-color:rgba(196,207,223,.5);background:rgba(244,246,255,.95);
+  box-shadow:0 4px 24px rgba(40,52,91,.08)}
 .ih-header *{box-sizing:border-box}
 .ih-outer{margin:0 auto;width:100%;max-width:1920px;
   padding:clamp(16px,1.56vw,30px) clamp(16px,8vw,240px)}
@@ -554,8 +560,28 @@ gtag('config','AW-17650633966');
   .ih-dd-btn svg,.ih-m-btn svg,.ih-link,.ih-btn-outline,.ih-btn-solid,.ih-btn-cta{transition:none}
 }
 .ih-header a:focus-visible,.ih-header button:focus-visible{outline:2px solid #9DB4FF;outline-offset:3px;border-radius:4px}
+
+/* ════════ СВЕТЛАЯ СХЕМА (шапка доехала до светлого контента) ════════
+   Логотип, пункты и кнопки инвертируются вместе с фоном — как на главной
+   iakuban.com и на betterup.com. Включается классом .ih-light из header.js. */
+.ih-light .ih-logo img{filter:brightness(0)}
+.ih-light .ih-link,.ih-light .ih-dd-btn{color:#4C587D}
+.ih-light .ih-link:hover,.ih-light .ih-dd-btn:hover,
+.ih-light .ih-link[aria-current="page"]{color:#28345B}
+.ih-light .ih-btn-outline{border-color:#C4CFDF;color:#28345B}
+.ih-light .ih-btn-outline:hover{border-color:#626C8E;background:transparent}
+.ih-light .ih-btn-solid{background:#1E1E24;color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+.ih-light .ih-btn-solid:hover{background:#333340}
+.ih-light .ih-burger{color:#28345B}
+.ih-light .ih-mobile{border-top-color:rgba(196,207,223,.6)}
+.ih-light .ih-m-btn,.ih-light .ih-mobile>.ih-m-list>a{color:#4C587D}
+.ih-light .ih-m-btn:hover,.ih-light .ih-mobile>.ih-m-list>a:hover{color:#28345B}
+.ih-light .ih-m-sub a{color:#626C8E}
+.ih-light .ih-m-sub a:hover,.ih-light .ih-m-sub a[aria-current="page"]{color:#28345B}
+.ih-light a:focus-visible,.ih-light button:focus-visible{outline-color:#3D3DF0}
+@media (prefers-reduced-motion:reduce){.ih-header{transition:none}}
 </style>
-<header class="ih-header">
+<header class="ih-header" data-dark-zone=".hero">
   <div class="ih-outer">
     <div class="ih-inner">
       <div class="ih-row">
@@ -608,6 +634,30 @@ gtag('config','AW-17650633966');
   var mBtn = header.querySelector('.ih-m-btn');
   var mSub = header.querySelector('.ih-m-sub');
   var closeTimer = null;
+
+  // ─── цветовая схема под фоном страницы ───
+  // Пока шапка идёт поверх тёмного верха — тёмная; как только нижняя граница
+  // тёмной зоны уходит под шапку, включается светлая схема (класс ih-light).
+  var darkZone = header.getAttribute('data-dark-zone');
+  var zoneEl = null;
+
+  function syncScheme(){
+    if(!darkZone) return;
+    // ищем лениво: скрипт шапки выполняется раньше, чем секции ниже появятся в DOM
+    if(!zoneEl || !zoneEl.isConnected) zoneEl = document.querySelector(darkZone);
+    if(!zoneEl) return;
+    var headerHeight = header.getBoundingClientRect().height;
+    header.classList.toggle('ih-light', zoneEl.getBoundingClientRect().bottom <= headerHeight);
+  }
+
+  if(darkZone){
+    syncScheme();
+    document.addEventListener('DOMContentLoaded', syncScheme);
+    window.addEventListener('load', syncScheme);
+    window.addEventListener('scroll', syncScheme, {passive:true});
+    // высота тёмной зоны зависит от ширины окна — пересчитываем и на resize
+    window.addEventListener('resize', syncScheme, {passive:true});
+  }
 
   function setDrop(open){
     if(!dd) return;
