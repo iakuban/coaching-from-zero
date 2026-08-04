@@ -41,19 +41,19 @@ gtag('config','G-Y2D060K2Z4');
   ym(109783359,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
 </script>
 <title>Урок 3. Пять принципов коучинга | Iakuban Coaching Academy</title>
-<meta name="description" content="Пять принципов, на которых строится работа профессионального коуча.">
+<meta name="description" content="Пять принципов работы коуча и авторская модель «Пирамида энергетических уровней Якубана»: от мечты к цели, плану и первому действию.">
 <!-- Служебная страница воронки: в поиск не отдаём -->
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://iakuban.com/coaching-from-zero/lesson-3">
 <meta property="og:site_name" content="Iakuban Coaching Academy">
 <meta property="og:title" content="Урок 3. Пять принципов коучинга">
-<meta property="og:description" content="Пять принципов, на которых строится работа профессионального коуча.">
+<meta property="og:description" content="Пять принципов работы коуча и авторская модель «Пирамида энергетических уровней Якубана»: от мечты к цели, плану и первому действию.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://iakuban.com/coaching-from-zero/lesson-3">
-<meta property="og:image" content="https://iakuban.com/coaching-from-zero/assets/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="https://iakuban.com/coaching-from-zero/assets/lesson3.jpg?v=2">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
 <link rel="icon" type="image/png" href="/coaching-from-zero/assets/favicon.png">
 <link rel="apple-touch-icon" href="/coaching-from-zero/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,7 +77,6 @@ gtag('config','G-Y2D060K2Z4');
        min-height:100vh;display:flex;flex-direction:column}
   .wrap{max-width:960px;margin:0 auto;padding:0 20px;width:100%}
 
-  /* декоративные кольца — как на родительском лендинге */
   .rings{position:fixed;border-radius:50%;border:1.5px solid rgba(255,255,255,.05);pointer-events:none;z-index:0}
   .r1{width:820px;height:820px;left:-300px;top:-200px}
   .r2{width:560px;height:560px;left:-180px;top:-70px}
@@ -88,7 +87,12 @@ gtag('config','G-Y2D060K2Z4');
   .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
   .logo{font-family:var(--headline);font-size:15px;font-weight:600;letter-spacing:.14em;
         color:#fff;text-decoration:none;white-space:nowrap}
-  .top-note{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+  .lnav{display:flex;gap:8px}
+  .lnav a{font-size:12.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim);
+          text-decoration:none;padding:8px 14px;border:1px solid rgba(255,255,255,.12);border-radius:999px;
+          transition:color .2s,border-color .2s;white-space:nowrap}
+  .lnav a:hover{color:#fff;border-color:rgba(255,255,255,.32)}
+  .lnav a[aria-current="page"]{color:#fff;background:rgba(61,61,240,.30);border-color:rgba(92,124,255,.55)}
 
   /* ─── КОНТЕНТ ─── */
   main{position:relative;z-index:1;flex:1 0 auto;padding:44px 0 90px}
@@ -99,31 +103,70 @@ gtag('config','G-Y2D060K2Z4');
      color:#fff;letter-spacing:-.01em;margin-bottom:18px}
   .lead{font-size:17.5px;line-height:1.6;color:var(--ink-soft);max-width:640px;margin-bottom:40px}
 
-  /* видео-блок 16:9 */
   .video{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;
          background:var(--dark-2);border:1px solid rgba(255,255,255,.09);
          box-shadow:0 34px 80px rgba(0,0,0,.5)}
   .video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .video .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-                 filter:brightness(.42) saturate(.9)}
-  .video .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
-             justify-content:center;gap:18px;text-align:center;padding:24px}
-  .video .play{width:76px;height:76px;border-radius:50%;background:var(--grad);
-               display:flex;align-items:center;justify-content:center;
-               box-shadow:0 14px 40px rgba(61,61,240,.45)}
-  .video .play svg{margin-left:5px}
-  .video .ph-t{font-size:16.5px;font-weight:500;color:#fff}
-  .video .ph-s{font-size:13.5px;line-height:1.55;color:var(--ink-soft);max-width:420px}
+  .vid-meta{margin-top:14px;display:flex;gap:8px;align-items:center;font-size:13px;color:var(--ink-dim)}
+  .vid-meta svg{flex:none}
 
-  /* CTA */
-  .cta{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+  .sec{margin-top:52px}
+  .sec h2{font-family:var(--headline);font-weight:500;font-size:22px;color:#fff;margin-bottom:18px}
+  .sec-intro{font-size:15px;line-height:1.6;color:var(--ink-soft);margin-bottom:18px;max-width:640px}
+  .sec-note{margin-top:14px;font-size:13.5px;line-height:1.6;color:var(--ink-dim);max-width:640px}
+
+  .points{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .points li{position:relative;padding-left:28px;font-size:15.5px;line-height:1.6;color:var(--ink-soft)}
+  .points li::before{content:'';position:absolute;left:0;top:11px;width:14px;height:2px;background:var(--grad);border-radius:2px}
+
+  .note{margin-top:32px;padding:18px 22px;border-left:3px solid #5C7CFF;background:rgba(92,124,255,.07);
+        border-radius:0 12px 12px 0;font-size:14.5px;line-height:1.65;color:var(--ink-soft);max-width:720px}
+
+  .tc{list-style:none;border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden}
+  .tc li{display:flex;gap:18px;padding:12px 18px;font-size:14.5px;line-height:1.5;color:var(--ink-soft);background:rgba(255,255,255,.02)}
+  .tc li:nth-child(even){background:rgba(255,255,255,.045)}
+  .tc .t{font-variant-numeric:tabular-nums;color:#9DB4FF;min-width:46px;font-weight:500}
+
+  .file{display:flex;align-items:center;gap:16px;padding:16px 18px;border:1px solid rgba(255,255,255,.1);
+        border-radius:14px;background:var(--dark-2);text-decoration:none;max-width:560px;
+        transition:border-color .2s}
+  .file:hover{border-color:rgba(92,124,255,.6)}
+  .f-ic{flex:none;width:44px;height:44px;border-radius:11px;background:var(--grad);color:#fff;
+        display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;letter-spacing:.06em}
+  .f-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .f-t{font-size:15px;font-weight:500;color:#fff;line-height:1.35}
+  .f-s{font-size:12.5px;color:var(--ink-dim)}
+  .f-dl{margin-left:auto;flex:none;color:#9DB4FF}
+
+  .task{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:14px;max-width:720px}
+  .task li{counter-increment:t;position:relative;padding-left:42px;font-size:15px;line-height:1.6;color:var(--ink-soft)}
+  .task li::before{content:counter(t);position:absolute;left:0;top:1px;width:27px;height:27px;border-radius:50%;
+        background:rgba(61,61,240,.25);border:1px solid rgba(92,124,255,.5);color:#C9D6FF;font-size:13px;
+        display:flex;align-items:center;justify-content:center}
+
+  .copy-btn{margin-top:18px;display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-size:14px;
+        font-weight:500;color:#C9D6FF;background:rgba(61,61,240,.16);border:1px solid rgba(92,124,255,.45);
+        padding:11px 20px;border-radius:10px;cursor:pointer;transition:background .2s,border-color .2s}
+  .copy-btn:hover{background:rgba(61,61,240,.3)}
+  .copy-btn.ok{color:#9BE8B6;border-color:rgba(114,222,158,.6);background:rgba(48,150,90,.16)}
+
+  /* следующий шаг */
+  .next{margin-top:60px;padding:30px;border-radius:20px;border:1px solid rgba(92,124,255,.30);
+        background:linear-gradient(160deg,rgba(61,61,240,.16),rgba(39,0,154,.08))}
+  .nc-k{display:block;font-size:12.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#9DB4FF;margin-bottom:8px}
+  .nc-t{display:block;font-family:var(--headline);font-weight:500;font-size:20px;line-height:1.35;color:#fff;margin-bottom:10px}
+  .nc-proof{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px}
+  .nc-btns{display:flex;gap:14px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;font-family:var(--body);
        background:var(--grad);color:#fff;text-decoration:none;border:none;cursor:pointer;
-       font-size:17px;font-weight:500;padding:19px 46px;border-radius:12px;
+       font-size:16.5px;font-weight:500;padding:17px 38px;border-radius:12px;
+       text-shadow:0 1px 2px rgba(0,0,0,.35);
        box-shadow:0 12px 34px rgba(61,61,240,.38);transition:filter .2s, transform .15s}
   .btn:hover{filter:brightness(1.12)}
   .btn:active{transform:translateY(1px)}
-  .cta-note{font-size:13.5px;line-height:1.55;color:var(--ink-dim);max-width:440px}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.24);box-shadow:none;color:#fff}
+  .btn-ghost:hover{filter:none;border-color:rgba(255,255,255,.55)}
+  .nc-note{margin-top:16px;font-size:13.5px;line-height:1.6;color:var(--ink-dim);max-width:560px}
 
   /* ─── FOOTER ─── */
   .footer{position:relative;z-index:1;background:rgba(0,0,0,.25);border-top:1px solid rgba(255,255,255,.07);
@@ -135,7 +178,6 @@ gtag('config','G-Y2D060K2Z4');
   .footer a:hover{color:#fff}
   .f-col{display:flex;flex-direction:column;gap:6px}
 
-  /* CookieHub под бренд */
   .ch2 *{--cookiehub-primary-color:#3D3DF0!important}
   .ch2-dialog .ch2-btn,.ch2-settings .ch2-btn{font-family:var(--body)!important;font-weight:500!important;border-radius:10px!important}
   .ch2-style-light .ch2-btn-primary,.ch2-style-dark .ch2-btn-primary{background:var(--grad)!important;color:#fff!important;border:none!important}
@@ -143,14 +185,15 @@ gtag('config','G-Y2D060K2Z4');
   .ch2-dialog a,.ch2-settings a{color:#3D3DF0!important}
 
   @media (max-width:640px){
-    .top{padding:20px 0}
-    .top-note{display:none}
-    main{padding:26px 0 70px}
+    .top{padding:18px 0}
+    .top .wrap{flex-direction:column;align-items:flex-start;gap:12px}
+    .lnav a{padding:7px 12px;font-size:11.5px}
+    main{padding:24px 0 70px}
     .lead{font-size:16px;margin-bottom:30px}
     .video{border-radius:14px}
-    .video .play{width:60px;height:60px}
-    .video .ph-s{display:none}
-    .cta{margin-top:32px}
+    .sec{margin-top:42px}
+    .next{margin-top:46px;padding:24px 20px}
+    .nc-btns{flex-direction:column}
     .btn{width:100%}
     .footer-in{flex-direction:column;gap:26px}
   }
@@ -162,7 +205,11 @@ gtag('config','G-Y2D060K2Z4');
 <header class="top">
   <div class="wrap">
     <a class="logo" href="https://iakuban.com/" aria-label="На главную iakuban.com">IAKUBAN COACHING ACADEMY</a>
-    <span class="top-note">Бесплатная программа</span>
+    <nav class="lnav" aria-label="Уроки программы">
+      <a href="/coaching-from-zero/lesson-1">Урок 1</a>
+      <a href="/coaching-from-zero/lesson-2">Урок 2</a>
+      <a href="/coaching-from-zero/lesson-3" aria-current="page">Урок 3</a>
+    </nav>
   </div>
 </header>
 
@@ -170,24 +217,93 @@ gtag('config','G-Y2D060K2Z4');
   <div class="wrap">
     <p class="eyebrow">Введение в коучинг · урок 3 из 3</p>
     <h1>Урок 3. Пять принципов коучинга</h1>
-    <p class="lead">Пять принципов, на которых строится работа профессионального коуча.</p>
+    <p class="lead">Пять принципов, на которых держится работа коуча, и авторская модель Алексея Якубана, которая превращает мечту в цель, план и первое действие.</p>
 
-    <!-- Видео урока: прямой mp4 из файлового хранилища GetCourse (постоянная публичная ссылка, вставлено 2026-08-04) -->
+    <!-- Видео урока: прямой mp4 из файлового хранилища GetCourse (постоянная публичная ссылка) -->
     <div class="video">
       <video controls preload="metadata" playsinline poster="/coaching-from-zero/assets/lesson3.jpg?v=2">
         <source src="https://fs.getcourse.ru/fileservice/file/download/a/895792/sc/336/h/db61c81d8141828beca0cae218a9c508.mp4" type="video/mp4">
       </video>
     </div>
+    <p class="vid-meta"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#8E8E93" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#8E8E93" stroke-width="2" stroke-linecap="round"/></svg>34 минуты · смотрите в удобном темпе, доступ не сгорает</p>
 
-    <div class="cta">
-      <a class="btn" href="https://t.me/iakuban_coach_bot">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.9 3.4 1.9 11.1c-1.1.4-1.1 1.6 0 2l4.9 1.6 1.9 5.9c.3.9 1.4 1.1 2 .4l2.8-2.7 5.1 3.7c.8.6 2 .2 2.2-.8l3-16.2c.2-1.1-.9-2-1.9-1.6ZM8.5 13.9l9.5-6.4c.3-.2.6.2.4.4l-7.8 7.4-.3 3.3z" fill="#fff"/></svg>
-        Продолжить в Telegram
+    <section class="sec" aria-label="Что внутри урока">
+      <h2>Что внутри урока</h2>
+      <ul class="points">
+        <li>Пять принципов, которые определяют, как коуч думает, слушает и задаёт вопросы</li>
+        <li>Авторская модель «Пирамида энергетических уровней»: как мечта проходит путь через душу, дух, ум и тело</li>
+        <li>Что сделать, чтобы завершить программу и получить сертификат</li>
+      </ul>
+    </section>
+
+    <section class="sec" aria-label="Тайм-коды">
+      <h2>Тайм-коды</h2>
+      <ul class="tc">
+        <li><span class="t">00:01</span><span>Обзор пройденного и анонс урока</span></li>
+        <li><span class="t">02:05</span><span>Пять принципов коучинга</span></li>
+        <li><span class="t">08:12</span><span>Пирамида энергетических уровней</span></li>
+        <li><span class="t">31:27</span><span>Как получить сертификат</span></li>
+      </ul>
+    </section>
+
+    <section class="sec" aria-label="Материалы урока">
+      <h2>Материалы урока</h2>
+      <a class="file" href="/coaching-from-zero/assets/piramida-energeticheskih-urovney-iakubana.pdf" target="_blank" rel="noopener">
+        <span class="f-ic" aria-hidden="true">PDF</span>
+        <span class="f-body"><span class="f-t">Пирамида энергетических уровней Якубана</span><span class="f-s">PDF · 1,2 МБ · откроется в новой вкладке</span></span>
+        <span class="f-dl" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
-      <p class="cta-note">Следующий урок откроется в Telegram-боте после нажатия «Урок посмотрен».</p>
+      <p class="sec-note">Модель из второй части урока одним листом. Сохраните: по ней удобно проходить уровни с клиентом или с собственной мечтой.</p>
+    </section>
+
+    <section class="sec" aria-label="Задание">
+      <h2>Задание</h2>
+      <p class="sec-intro">Возьмите одну свою мечту и пройдите её по четырём уровням пирамиды, письменно.</p>
+      <ol class="task" id="task-list">
+        <li>Душа: в чём моя мечта?</li>
+        <li>Дух: принято ли решение, что она станет реальностью?</li>
+        <li>Ум: что конкретно нужно сделать? Есть ли план?</li>
+        <li>Тело: какое первое действие я могу сделать уже сегодня?</li>
+      </ol>
+      <button class="copy-btn" type="button" data-copy aria-live="polite">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="copy-btn__label">Скопировать вопросы</span>
+      </button>
+    </section>
+
+    <div class="next">
+      <span class="nc-k">Финал программы</span>
+      <span class="nc-t">Материалы программы и живой тренинг с Алексеем</span>
+      <p class="nc-proof">Программу уже прошли 130+ учеников.</p>
+      <div class="nc-btns">
+        <a class="btn" href="https://t.me/iakuban_coach_bot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.9 3.4 1.9 11.1c-1.1.4-1.1 1.6 0 2l4.9 1.6 1.9 5.9c.3.9 1.4 1.1 2 .4l2.8-2.7 5.1 3.7c.8.6 2 .2 2.2-.8l3-16.2c.2-1.1-.9-2-1.9-1.6ZM8.5 13.9l9.5-6.4c.3-.2.6.2.4.4l-7.8 7.4-.3 3.3z" fill="currentColor"/></svg> Завершить в Telegram</a>
+      </div>
+      <p class="nc-note">Нажмите в боте «Урок посмотрен»: бот откроет финал программы, выдаст материалы и место на живом Zoom-тренинге с Алексеем 29 августа.</p>
     </div>
   </div>
 </main>
+
+<script>
+document.querySelector('[data-copy]').addEventListener('click', function(){
+  var items = [...document.querySelectorAll('#task-list li')].map(function(li,i){return (i+1)+'. '+li.textContent.trim()});
+  var text = 'Урок 3. Пять принципов коучинга\nЗадание:\n'+items.join('\n');
+  var self = this, label = self.querySelector('.copy-btn__label');
+  function ok(){
+    self.classList.add('ok'); label.textContent='Скопировано';
+    setTimeout(function(){self.classList.remove('ok'); label.textContent='Скопировать вопросы'},2200);
+  }
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    var done=false; try{done=document.execCommand('copy')}catch(e){}
+    document.body.removeChild(ta);
+    if(done){ok()}else{label.textContent='Не получилось, выделите текст вручную'}
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(ok, fallback);
+  }else{fallback()}
+});
+</script>
 
 <footer class="footer">
   <div class="footer-in">
