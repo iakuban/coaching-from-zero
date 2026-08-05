@@ -10,9 +10,11 @@ DTSTART:20260829T070000Z
 DTEND:20260829T140000Z
 SUMMARY:Живой Zoom-тренинг «Профессия коуч» с 
  Алексеем Якубаном
-DESCRIPTION:Ссылка на подключение придёт в за
- крытом Telegram-канале программы: https://t.me/+tf2r
- eU5GmCkyZWVi
+LOCATION:https://us02web.zoom.us/j/81011002509?pwd=g7Sq9wcF5xcDCUQQSfa2WWd
+ d00vehF.1
+DESCRIPTION:Подключение: по Zoom-ссылке в поле м
+ еста. Материалы и напоминания: закрытый 
+ Telegram-канал программы https://t.me/+tf2reU5GmCkyZWVi
 URL:https://iakuban.com/coaching-from-zero/lesson-3
 BEGIN:VALARM
 ACTION:DISPLAY
